@@ -1,9 +1,9 @@
 from datetime import datetime
 
-users = [{"name": "Bill Gates", "birthday": datetime(1955, 3, 10)},{"name": "Bill Gates", "birthday": datetime(1955, 10, 28)},{"name": "Bill Gates", "birthday": datetime(1955, 10, 28)}]
-
 def get_birthdays_per_week(users):
     today = datetime.today().date()
+    #today = datetime(year=2024, month=3, day=4).date()
+    res={}
     for user in users:
         name = user["name"]
         birthday = user["birthday"].date()
@@ -13,10 +13,27 @@ def get_birthdays_per_week(users):
         else:
             delta_days = (birthday_this_year - today).days
             if delta_days < 7:
-                print(delta_days.strftime("%A"))
+                if (birthday_this_year.strftime("%A") == "Saturday" or birthday_this_year.strftime("%A") == "Sunday") and today.strftime("%A") == "Monday":
+                    if res.get("next_Monday") is None:
+                        res["next_Monday"]=[name]
+                    else:
+                        res["next_Monday"].append(name)
+                elif (birthday_this_year.strftime("%A") == "Saturday" or birthday_this_year.strftime("%A") == "Sunday") and today.strftime("%A") != "Monday":
+                    print("M")
+                    if res.get("Monday") is None:
+                        res["Monday"]=[name]
+                    else:
+                        res["Monday"].append(name)
+                else:
+                    if res.get(birthday_this_year.strftime("%A")) is None:
+                        res[birthday_this_year.strftime("%A")]=[name]
+                    else:
+                        res[birthday_this_year.strftime("%A")].append(name)
+
     
-    
+    for k, v in res.items():
+        j_v = ", ".join(v)
+        print(f"{k}: {j_v}")
     
     return
 
-get_birthdays_per_week(users)
