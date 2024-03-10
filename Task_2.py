@@ -5,8 +5,11 @@ def parse_input(user_input):
 
 def add_contact(args, contacts):
     name, phone = args
-    contacts[name] = phone
-    return "Contact added."
+    if name in contacts:
+        return "Contact already exists."
+    else:
+        contacts[name] = phone
+        return "Contact added."
 
 def change_contact(args, contacts):
     name, phone = args
@@ -17,21 +20,23 @@ def change_contact(args, contacts):
         return "Contact does not exist, unable to change."
 
 def phone_contact(args, contacts):
-    name, phone = args
+    name = args
+    name = "".join(name)
     if name in contacts:
-        return str(contacts[name])
+        return contacts[name]
     else:
         return "Contact does not exist, unable to call."
     
-def all_contacts():
-    global contacts
+def all_contacts(contacts):
     str=""
-    for k, v in contacts.items:
+    for k, v in contacts.items():
         str += ('{:<10} {:<10}\n'.format(k, v))
+    str=str.rstrip("\n")
     return str
 
 def main():
-    contacts = {}
+    contacts = {"jan":"2137",
+                "pawel":"2215"}
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
@@ -49,7 +54,7 @@ def main():
         elif command == "phone":
             print(phone_contact(args, contacts))
         elif command == "all":
-            print(all_contacts())
+            print(all_contacts(contacts))
         else:
             print("Invalid command.")
 
