@@ -2,7 +2,6 @@ from datetime import datetime
 
 def get_birthdays_per_week(users):
     today = datetime.today().date()
-    #today = datetime(year=2024, month=3, day=4).date()
     res={}
     for user in users:
         name = user["name"]

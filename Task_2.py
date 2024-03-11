@@ -35,8 +35,7 @@ def all_contacts(contacts):
     return str
 
 def main():
-    contacts = {"jan":"2137",
-                "pawel":"2215"}
+    contacts = {}
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
