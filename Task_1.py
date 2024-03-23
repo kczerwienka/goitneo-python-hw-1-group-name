@@ -34,5 +34,4 @@ def get_birthdays_per_week(users):
         j_v = ", ".join(v)
         print(f"{k}: {j_v}")
     
-    return
 
